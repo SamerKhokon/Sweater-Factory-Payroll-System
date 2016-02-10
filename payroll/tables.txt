@@ -1,0 +1,193 @@
+CREATE TABLE USER_INFO
+(
+   U_ID  NUMBER(10,0),       			
+   USER_NAME  VARCHAR2 (100 BYTE)         	NOT NULL,
+   USER_ID   VARCHAR2 (100 BYTE)		NOT NULL,
+   USER_PASSWORD   VARCHAR2 (100 BYTE)        	NOT NULL,
+   USER_TYPE   VARCHAR2 (1 BYTE)             	NOT NULL, //A,R,U(Admin,Reseller,User)
+   RES_ID  NUMBER(10,0)          		NOT NULL,
+   ENTRY_DATE DATE 				NOT NULL,
+   constraints USER_INFO_pk primary key(U_ID)
+);
+CREATE SEQUENCE USER_INFOSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER USER_INFOtrigger before insert on USER_INFO for each row begin select USER_INFOSEQUENCE.nextval into :new.U_ID  from dual;end;
+
+
+
+
+CREATE TABLE SMS_REQ
+(
+   SR_ID  NUMBER(10,0)        			
+   REQ_TO  NUMBER(10,0)         		NOT NULL,
+   REQ_FROM  NUMBER(10,0)         		NOT NULL,
+   AMOUNT  NUMBER(10,0)         		NOT NULL,
+   ENTRY_DATE DATE 				NOT NULL,
+   FLAG NUMBER(1,0)          			NOT NULL,  //R,A,C (Request,Accept,Cancel)
+   constraints SMS_REQ_pk primary key(SR_ID),
+   constraints SMS_REQ_fk foreign key(REQ_TO) references USER_INFO(U_ID)
+);
+CREATE SEQUENCE  SMS_REQSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  SMS_REQtrigger before insert on SMS_REQ  for each row begin select SMS_REQSEQUENCE.nextval into :new.SR_ID  from dual;end;
+
+
+
+
+CREATE TABLE SMS_IN
+(
+   ID  NUMBER(10,0),       			
+   U_ID  NUMBER(10,0)         			NOT NULL,
+   AMOUNT  NUMBER(10,0)         		NOT NULL,
+   ENTRY_DATE DATE 				NOT NULL,
+   constraints SMS_IN_pk primary key(ID),
+   constraints SMS_IN_fk foreign key(U_ID) references USER_INFO(U_ID)
+);
+CREATE SEQUENCE  SMS_INSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  SMS_INtrigger before insert on SMS_IN  for each row begin select SMS_INSEQUENCE.nextval into :new.ID  from dual;end;
+
+
+
+CREATE TABLE SMS_OUT
+(
+   ID  NUMBER(10,0),       			
+   U_ID  NUMBER(10,0)         			NOT NULL,
+   AMOUNT  NUMBER(10,0)         		NOT NULL,
+   ENTRY_DATE DATE 				NOT NULL,
+   constraints SMS_OUT_pk primary key(ID),
+   constraints SMS_OUT_fk foreign key(U_ID) references USER_INFO(U_ID)
+);
+CREATE SEQUENCE  SMS_OUTSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  SMS_OUTtrigger before insert on SMS_OUT  for each row begin select SMS_OUTSEQUENCE.nextval into :new.ID  from dual;end;
+
+
+CREATE TABLE SMS_STOCK
+(
+   ID  NUMBER(10,0),       			
+   U_ID  NUMBER(10,0)         			NOT NULL,
+   AMOUNT  NUMBER(10,0)         		NOT NULL,
+   ENTRY_DATE DATE 				NOT NULL,
+   constraints SMS_STOCK_pk primary key(ID),
+   constraints SMS_STOCK_fk foreign key(U_ID) references USER_INFO(U_ID)
+);
+CREATE SEQUENCE  SMS_STOCKSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  SMS_STOCKtrigger before insert on SMS_STOCK  for each row begin select SMS_STOCKSEQUENCE.nextval into :new.ID  from dual;end;
+
+
+
+CREATE TABLE TBL_T_MENU
+(
+   MENU_ID  NUMBER(10,0),       			
+   MENU_NAME  VARCHAR2 (100 BYTE)         	NOT NULL,
+   MENU_CONTENT  VARCHAR2 (100 BYTE)         	NOT NULL,
+   SUB_MENU  VARCHAR2 (3 BYTE)         		NOT NULL,
+   ORDER_ID  NUMBER(2,0)         		NOT NULL,
+   
+   constraints TBL_T_MENU_pk primary key(MENU_ID)
+);
+CREATE SEQUENCE  TBL_T_MENUSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  TBL_T_MENUtrigger before insert on TBL_T_MENU  for each row begin select TBL_T_MENUSEQUENCE.nextval into :new.MENU_ID  from dual;end;
+
+
+
+CREATE TABLE TBL_T_SUB_MENU1
+(
+   SUB_MENU_ID  NUMBER(10,0),       			
+   SUB_MENU_NAME  VARCHAR2 (100 BYTE)         	NOT NULL,
+   MAIN_MUNU_ID  NUMBER(2,0)         		NOT NULL,
+   SUB_MENU_CONTENT  VARCHAR2 (100 BYTE)         	NOT NULL,
+   SUB1_SUB_MENU  VARCHAR2 (3 BYTE),
+   
+   constraints TBL_T_SUB_MENU1_pk primary key(SUB_MENU_ID)
+);
+CREATE SEQUENCE  TBL_T_SUB_MENU1SEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  TBL_T_SUB_MENU1trigger before insert on TBL_T_SUB_MENU1  for each row begin select TBL_T_SUB_MENU1SEQUENCE.nextval into :new.SUB_MENU_ID  from dual;end;
+
+
+CREATE TABLE TBL_T_SUB_MENU2
+(
+   SUB_MENU2_ID  NUMBER(10,0),       			
+   MENU_NAME2  VARCHAR2 (100 BYTE)         	NOT NULL,
+   SUB_MUNU1_ID  NUMBER(2,0)         		NOT NULL,
+   MENU_CONTENT  VARCHAR2 (100 BYTE)         	NOT NULL,
+   
+   constraints TBL_T_SUB_MENU2_pk primary key(SUB_MENU2_ID)
+);
+CREATE SEQUENCE  TBL_T_SUB_MENU2SEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  TBL_T_SUB_MENU2trigger before insert on TBL_T_SUB_MENU2  for each row begin select TBL_T_SUB_MENU2SEQUENCE.nextval into :new.SUB_MENU2_ID  from dual;end;
+
+
+CREATE TABLE TBL_GROUP_MENU
+(
+   GM_ID  NUMBER(10,0),       			
+   MENU_ID  VARCHAR2 (200 BYTE)         	NOT NULL,
+   SUB_MENU_ID  VARCHAR2 (200 BYTE)         	NOT NULL,
+    
+   constraints TBL_GROUP_MENU_pk primary key(GM_ID)
+);
+CREATE SEQUENCE  TBL_GROUP_MENUSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  TBL_GROUP_MENUtrigger before insert on TBL_GROUP_MENU  for each row begin select TBL_GROUP_MENUSEQUENCE.nextval into :new.GM_ID  from dual;end;
+
+
+
+CREATE TABLE TBL_USER_INFO
+(
+   U_ID  NUMBER(10,0),       			
+   USER_NAME  VARCHAR2 (100 BYTE)         	NOT NULL,
+   USER_ID   VARCHAR2 (100 BYTE)		NOT NULL,
+   USER_PASSWORD   VARCHAR2 (100 BYTE)        	NOT NULL,
+   USER_TYPE   VARCHAR2 (1 BYTE)             	NOT NULL,
+   RES_ID  NUMBER(10,0)          		NOT NULL,
+   USER_GROUP  NUMBER(1,0)          		NOT NULL,
+   ENTRY_DATE DATE 				NOT NULL,
+   constraints TBL_USER_INFO_pk primary key(U_ID)
+);
+CREATE SEQUENCE TBL_USER_INFOSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER TBL_USER_INFOtrigger before insert on TBL_USER_INFO for each row begin select TBL_USER_INFOSEQUENCE.nextval into :new.U_ID  from dual;end;
+
+
+
+
+
+CREATE TABLE TBL_LEAVE_YEARLY
+(
+   ID  NUMBER(10,0)        			
+   SECTION_ID   NUMBER(10,0)         		NOT NULL,
+   COMPANY_ID   NUMBER(10,0)         		NOT NULL,
+   TOTAL_LEAVE  NUMBER(2,0)          		NOT NULL,
+   CASUAL	DATE 				NOT NULL,
+   ANUAL	NUMBER(2,0)          		NOT NULL,
+   SICK		NUMBER(2,0)          		NOT NULL,
+   ENTRY_DATE DATE 				NOT NULL,
+  
+  
+   constraints TBL_LEAVE_YEARLY_pk primary key(ID)
+);
+CREATE OR REPLACE TRIGGER  TBL_LEAVE_YEARLYtrigger before insert on TBL_LEAVE_YEARLY  for each row begin select TBL_LEAVE_YEARLYSEQUENCE.nextval into :new.ID  from dual;end;
+
+
+CREATE TABLE TBL_PAY_PRODUCTIONBONUS_SET
+(
+   ID  NUMBER(10,0)        			
+   PRODUC_AMNT_FROM   NUMBER(10,0)         	NOT NULL,
+   PRODUC_AMNT_TO     NUMBER(10,0)         	NOT NULL,
+   BONUS_AMNT    NUMBER(10,0)         		NOT NULL,
+   COMPANY_ID   NUMBER(10,0)         		NOT NULL,
+   SECTION_ID  NUMBER(2,0)          		NOT NULL,
+   ENTRY_DATE DATE 				NOT NULL,
+  
+  
+   constraints TBL_PAY_PRODUCTIONBONUS_SET_pk primary key(ID)
+);
+
+
+create or replace TRIGGER "PAYROLL".tri_allow_PRODUCTIONBONUS_id BEFORE INSERT on TBL_PAY_PRODUCTIONBONUS_SET
+for each row
+when (new.id is null)
+begin
+   SELECT SEQ_AUTO_INCREMENT.nextval INTO :new.id FROM DUAL;
+end;
+
+
+
+
+
+

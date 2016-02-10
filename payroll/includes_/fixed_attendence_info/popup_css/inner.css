@@ -1,0 +1,53 @@
+/* 
+
+Creation - CSS File
+
+USE THIS STYLE SHEET FOR INNER PAGE
+
+*/
+/* PORTFOLIO */
+#gallery{ min-height:556px; width:940px; }
+#pic-placeholder{float:left; width:600px; padding:20px 20px 20px 0px;}
+#desc-placeholder{float:left; width:299px; padding:20px 0px 20px 20px; border-left:solid 1px #e9e9e9;}
+ul.portfolio{margin:0px; padding:0px 0px 0px 0px; list-style-type:none;}
+ul.portfolio li{margin:0px 0px 0px 0px; padding:0px 0px 30px 0px; list-style-type:none;  float:left; position:relative;}
+ul.portfolio li.nomargin{margin-right:0px;}
+ul.portfolio li img{margin:0px 30px 0px 0px;}
+ul.portfolio li.nomargin img{margin-right:10px;}
+.frame-image-top{width:290px!important; height:11px; background-image:url(../images/pf-frame-top.png); background-repeat:no-repeat; background-position:top; position:absolute; overflow:hidden; z-index:900 !important; top:-2px; left:0px}
+.frame-image-bottom{width:290px!important; height:11px; background-image:url(../images/pf-frame-bottom.png); position:absolute; bottom:32px; left:0; background-repeat:no-repeat; background-position:top; }
+.pf-desc{ background-image:url(../images/bg-txt-pf.png); background-repeat:repeat-x; position:absolute; top:115px; left:0px; width:275px!important; color:#fefefe; padding:2px 0px 2px 15px; font-size:14px;}
+#gallery-navigation{ width:930px;}
+a.prev2{ background-color:#fff; background-image:url(../images/arrow-pf-l.gif); background-repeat:no-repeat; background-position:10px 11px; font-size:14px;}
+a.next2{background-color:#fff; background-image:url(../images/arrow-pf.gif); background-repeat:no-repeat; background-position:61px 11px; font-size:14px;}
+a.prev2:hover , a.next2:hover{ background-color:#f4f4f4;}
+
+/* BLOG */
+.post{margin-bottom:50px}
+.post h2{text-transform:uppercase !important; margin-bottom:4px}
+.post h2 a:hover{text-decoration:none;}
+.icon{vertical-align:middle; padding-right:5px}
+.postmetadata{font-size:11px; margin-bottom:12px;}
+.postmetadata span{padding-right:20px;}
+.more{display:block; border:solid 1px #bebebe; width:80px; margin-top:10px; padding:1px; text-align:center; color:#666666; background-color:#f4f4f4}
+a.more, a.more:visited{color:#666; font-size:11px}
+
+
+/* CONTACT */
+form{margin:0; padding:0;}
+fieldset{border:0px;}
+#contact_form{margin:0 auto; position:relative}
+label{margin-top:3px;}
+label.sp { width:3px;}
+span.error{color:red;text-align:left;}
+
+#message{ margin-left:0px;}
+#message h2	{}
+#message p{margin:6px 0px; }
+
+input.text-input{ margin:4px 8px 4px 0px; width: 280px; height:15px; padding:5px 2px; border:solid 1px #e9e9e9; vertical-align:middle}
+textarea.text-input{ margin:0px 8px 4px 0px; padding: 5px 2px; border:solid 1px #e9e9e9; vertical-align:top; width:380px;}
+#contact_form input:focus, #contact_form textarea:focus {border:solid 1px #e9e9e9 }
+#contact_form input.but{font-family:Arial; font-size:11px !important;  padding:5px 5px; border:0px; margin-top:10px; cursor:pointer; background-color:#f4f4f4; border:solid 1px #e9e9e9; color:#666666}
+* html #contact_form input.but{padding:6px 6px !important;}/* ie 6 only */
+*+html #contact_form input.but{padding:6px 6px !important;}/* ie 7 only */

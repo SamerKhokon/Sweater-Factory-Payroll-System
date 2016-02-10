@@ -1,0 +1,73 @@
+
+FIELDSET.sectionwrap
+{
+    BORDER-TOP-WIDTH: 0px;
+    PADDING-RIGHT: 5px;
+    PADDING-LEFT: 5px;
+    BORDER-LEFT-WIDTH: 0px;
+    BORDER-BOTTOM-WIDTH: 0px;
+    PADDING-BOTTOM: 5px;
+    PADDING-TOP: 5px;
+    BORDER-RIGHT-WIDTH: 0px
+}
+LEGEND
+{
+    FONT: bold 16px Arial;
+    COLOR: darkred;
+}
+DIV.stepsguide
+{
+    MARGIN-BOTTOM: 15px;
+    OVERFLOW: hidden;
+    WIDTH: 800px;
+    CURSOR: pointer
+}
+DIV.stepsguide .step
+{
+    FLOAT: left;
+    FONT: bold 24px Arial;
+    WIDTH: 266px;
+}
+DIV.stepsguide .disabledstep
+{
+	color: #c4c4c4; display: inline-block; margin: 0 0 8px 0;
+}
+DIV.stepsguide .step .smalltext
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 13px;
+}
+DIV.formpaginate
+{
+    MARGIN-TOP: 1em;
+    FONT-WEIGHT: bold;
+    OVERFLOW: hidden;
+    WIDTH: 350px;
+    TEXT-ALIGN: center
+}
+DIV.formpaginate .prev
+{
+    PADDING-RIGHT: 25px;
+    PADDING-LEFT: 25px;
+    BACKGROUND: #530000;
+    PADDING-BOTTOM: 5px;
+    CURSOR: pointer;
+    COLOR: white;
+    PADDING-TOP: 5px;
+    border-radius: 5px;
+    webkit-border-radius: 5px;
+    moz-border-radius: 5px
+}
+DIV.formpaginate .next
+{
+    PADDING-RIGHT: 25px;
+    PADDING-LEFT: 25px;
+    BACKGROUND: #530000;
+    PADDING-BOTTOM: 5px;
+    CURSOR: pointer;
+    COLOR: white;
+    PADDING-TOP: 5px;
+    border-radius: 5px;
+    webkit-border-radius: 5px;
+    moz-border-radius: 5px;	
+}

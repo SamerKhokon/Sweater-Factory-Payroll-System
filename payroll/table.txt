@@ -1,0 +1,160 @@
+CREATE TABLE USERS
+(
+   U_ID  NUMBER(10,0),       			
+   USER_NAME  VARCHAR2 (100 BYTE)         	NOT NULL,
+   USER_ID   VARCHAR2 (100 BYTE)		NOT NULL,
+   USER_PASSWORD   VARCHAR2 (100 BYTE)        	NOT NULL,
+   USER_GROUP  NUMBER(1,0)          		NOT NULL,
+   PAYROLL  NUMBER(1,0),
+   INV  NUMBER(1,0),
+   HR  NUMBER(1,0),
+   ENTRY_DATE DATE 				NOT NULL,
+   constraints USERS_pk primary key(U_ID)
+);
+CREATE SEQUENCE USERSSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER USERStrigger before insert on USERS for each row begin select USERSSEQUENCE.nextval into :new.U_ID  from dual;end;
+
+
+//PAYROLL:
+
+CREATE TABLE PAYROLL_GROUP_MENU
+(
+   PR_ID  NUMBER(10,0),       			
+   MENU_ID  VARCHAR2 (200 BYTE)         	NOT NULL,
+   SUB_MENU_ID  VARCHAR2 (200 BYTE)         	NOT NULL,
+    
+   constraints PAYROLL_GROUP_MENU_pk primary key(PR_ID)
+);
+CREATE SEQUENCE  PAYROLL_GROUP_MENUSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  PAYROLL_GROUP_MENUtrigger before insert on PAYROLL_GROUP_MENU  for each row begin select PAYROLL_GROUP_MENUSEQUENCE.nextval into :new.PR_ID  from dual;end;
+
+
+CREATE TABLE PAYROLL_MENU
+(
+   MAIN_MUNU_ID  NUMBER(10,0),       			
+   MENU_NAME  VARCHAR2 (100 BYTE)         	NOT NULL,
+   MENU_CONTENT  VARCHAR2 (100 BYTE)         	NOT NULL,
+   SUB_MENU  VARCHAR2 (3 BYTE)         		NOT NULL,
+   ORDER_ID  NUMBER(2,0)         		NOT NULL,
+   
+   constraints PAYROLL_MENU_pk primary key(MAIN_MUNU_ID)
+);
+CREATE SEQUENCE  PAYROLL_MENUSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  PAYROLL_MENUtrigger before insert on PAYROLL_MENU  for each row begin select PAYROLL_MENUSEQUENCE.nextval into :new.MAIN_MUNU_ID  from dual;end;
+
+
+
+
+CREATE TABLE PAYROLL_SUB_MENU1
+(
+   PAYROLL_MENU_ID  NUMBER(10,0),       			
+   SUB_MENU_NAME  VARCHAR2 (100 BYTE)         	NOT NULL,
+   MAIN_MUNU_ID  NUMBER(2,0)         		NOT NULL,
+   SUB_MENU_CONTENT  VARCHAR2 (100 BYTE)         	NOT NULL,
+   SUB1_SUB_MENU  VARCHAR2 (3 BYTE),
+   
+   constraints PAYROLL_SUB_MENU1_pk primary key(PAYROLL_MENU_ID)
+);
+CREATE SEQUENCE  PAYROLL_SUB_MENU1SEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  PAYROLL_SUB_MENU1trigger before insert on PAYROLL_SUB_MENU1  for each row begin select PAYROLL_SUB_MENU1SEQUENCE.nextval into :new.PAYROLL_MENU_ID  from dual;end;
+
+
+//INV:
+
+
+CREATE TABLE INV_GROUP_MENU
+(
+   INV_ID  NUMBER(10,0),       			
+   MENU_ID  VARCHAR2 (200 BYTE)         	NOT NULL,
+   SUB_MENU_ID  VARCHAR2 (200 BYTE)         	NOT NULL,
+    
+   constraints INV_GROUP_MENU_pk primary key(INV_ID)
+);
+CREATE SEQUENCE  INV_GROUP_MENUSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  INV_GROUP_MENUtrigger before insert on INV_GROUP_MENU  for each row begin select INV_GROUP_MENUSEQUENCE.nextval into :new.INV_ID  from dual;end;
+
+
+
+CREATE TABLE INV_MENU
+(
+   MAIN_MUNU_ID  NUMBER(10,0),       			
+   MENU_NAME  VARCHAR2 (100 BYTE)         	NOT NULL,
+   MENU_CONTENT  VARCHAR2 (100 BYTE)         	NOT NULL,
+   SUB_MENU  VARCHAR2 (3 BYTE)         		NOT NULL,
+   ORDER_ID  NUMBER(2,0)         		NOT NULL,
+   
+   constraints INV_MENU_pk primary key(MAIN_MUNU_ID)
+);
+CREATE SEQUENCE  INV_MENUSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  INV_MENUtrigger before insert on INV_MENU for each row begin select INV_MENUSEQUENCE.nextval into :new.MAIN_MUNU_ID  from dual;end;
+
+
+
+
+CREATE TABLE INV_SUB_MENU1
+(
+   INV_MENU_ID  NUMBER(10,0),       			
+   SUB_MENU_NAME  VARCHAR2 (100 BYTE)         	NOT NULL,
+   MAIN_MUNU_ID  NUMBER(2,0)         		NOT NULL,
+   SUB_MENU_CONTENT  VARCHAR2 (100 BYTE)         	NOT NULL,
+   SUB1_SUB_MENU  VARCHAR2 (3 BYTE),
+   
+   constraints INV_SUB_MENU1_pk primary key(INV_MENU_ID)
+);
+CREATE SEQUENCE  INV_SUB_MENU1SEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  INV_SUB_MENU1trigger before insert on INV_SUB_MENU1  for each row begin select INV_SUB_MENU1SEQUENCE.nextval into :new.INV_MENU_ID  from dual;end;
+
+
+
+
+
+//HR:
+
+
+
+CREATE TABLE HR_GROUP_MENU
+(
+   HR_ID  NUMBER(10,0),       			
+   MENU_ID  VARCHAR2 (200 BYTE)         	NOT NULL,
+   SUB_MENU_ID  VARCHAR2 (200 BYTE)         	NOT NULL,
+    
+   constraints HR_GROUP_MENU_pk primary key(HR_ID)
+);
+CREATE SEQUENCE  HR_GROUP_MENUSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  HR_GROUP_MENUtrigger before insert on HR_GROUP_MENU  for each row begin select HR_GROUP_MENUSEQUENCE.nextval into :new.HR_ID  from dual;end;
+
+
+
+CREATE TABLE HR_MENU
+(
+   MAIN_MUNU_ID  NUMBER(10,0),       			
+   MENU_NAME  VARCHAR2 (100 BYTE)         	NOT NULL,
+   MENU_CONTENT  VARCHAR2 (100 BYTE)         	NOT NULL,
+   SUB_MENU  VARCHAR2 (3 BYTE)         		NOT NULL,
+   ORDER_ID  NUMBER(2,0)         		NOT NULL,
+   
+   constraints HR_MENU_pk primary key(MAIN_MUNU_ID)
+);
+CREATE SEQUENCE  HR_MENUSEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  HR_MENUtrigger before insert on HR_MENU for each row begin select HR_MENUSEQUENCE.nextval into :new.MAIN_MUNU_ID  from dual;end;
+
+
+
+
+
+
+
+CREATE TABLE HR_SUB_MENU1
+(
+   HR_MENU_ID  NUMBER(10,0),       			
+   SUB_MENU_NAME  VARCHAR2 (100 BYTE)         	NOT NULL,
+   MAIN_MUNU_ID  NUMBER(2,0)         		NOT NULL,
+   SUB_MENU_CONTENT  VARCHAR2 (100 BYTE)         	NOT NULL,
+   SUB1_SUB_MENU  VARCHAR2 (3 BYTE),
+   
+   constraints HR_SUB_MENU1_pk primary key(HR_MENU_ID)
+);
+CREATE SEQUENCE  HR_SUB_MENU1SEQUENCE START WITH 1 increment by 1;
+CREATE OR REPLACE TRIGGER  HR_SUB_MENU1trigger before insert on HR_SUB_MENU1  for each row begin select HR_SUB_MENU1SEQUENCE.nextval into :new.HR_MENU_ID  from dual;end;
+
+
